@@ -9,8 +9,17 @@
   </head>
   <body>
     <div id="profile"></div>
+    
     <script type="text/jsx">
-      var ProfilePic = React.createClass({
+      var Profile = React.createClass({
+        render: function(){
+          return (
+              <Pic />
+              <SlideDeck />
+          );
+        }
+      });
+      var Pic = React.createClass({
         render: function(){
           return (
             <div className="profilePic">
@@ -20,8 +29,21 @@
           );
         }
       });
+      var SlideDeck = React.createClass({
+        
+      });
+      var Slide = React.createClass({
+        render: function(){
+          return (
+            <div className="profilePic">
+              <h2>Loves to dive</h2>
+              <img src="http://www.aqua-sport.com/_Uploads/dbsArticles/DivingCourse1.JPG"/>
+            </div>
+          );
+        }
+      });
       React.render(
-        <ProfilePic />, document.getElementById('profile')
+        <Profile />, document.getElementById('profile')
       );
     </script>
   </body>
