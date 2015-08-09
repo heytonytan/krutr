@@ -6,10 +6,21 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
   </head>
   <body>
-    <div class="container">
-    </div>
+    <div id="profile"></div>
+    <script type="text/jsx">
+    var ProfilePic = React.createClass({
+      render: function(){
+        return (
+          <div className="profilePic">
+            <h1>Perk Lim</h1>
+            <img src="http://i.ytimg.com/vi/vRyAjF0Hvv4/hqdefault.jpg"/>
+          </div>
+        );
+      }
+    });
+    React.render(
+      <ProfilePic />, document.getElementById('profile');
+    );
+    </script>
   </body>
-
-<!-- <script src="main.js"></script> -->
-
 </html>
