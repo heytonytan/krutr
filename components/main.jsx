@@ -19,29 +19,19 @@ var ProfilePic = React.createClass({
   }
 });
 var SlideDeck = React.createClass({
+  mixins: [ReactFireMixin],
   getInitialState: function(){
-    return {
-      data: [
-        {
-          id: "4234234",
-          description: "Graduated from the University of Pennsylvania with a BSc in Computer Science",
-          picture: "http://www.natcom.org/uploadedImages/More_Scholarly_Resources/Doctoral_Program_Resource_Guide/UPenn%20Campus.jpg"
-        },
-        {
-          id: "4234235",
-          description: "Presently works at Box",
-          picture: "http://hackathon-in-a-box.org/img/box.png"
-        },
-        {
-          id: "4234236",
-          description: "Loves Scuba and badminton",
-          picture: "http://www.aqua-sport.com/_Uploads/dbsArticles/DivingCourse1.JPG"
-        }
-      ]
-    };
+      return {user: 0};
+  },
+  componentWillMount: function() {
+    var firebaseRef = new Firebase("https://radiant-fire-9112.firebaseio.com/users/tony");
+    this.bindAsObject(firebaseRef, "user");
   },
   render: function(){
-    this.props.data.map(function(slide){
+    console.log("Hi");
+    console.log(this.state.user);
+
+    this.state.user.slides.map(function(slide){
       return (
         <div className="slide">
           <h2>{slide.description}</h2>

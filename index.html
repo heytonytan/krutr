@@ -6,11 +6,86 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/react.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/JSXTransformer.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.firebase.com/js/client/2.2.9/firebase.js"></script>
+    <script src="https://cdn.firebase.com/libs/reactfire/0.5.0/reactfire.min.js"></script>
   </head>
   <body>
     <div id="content"></div>
-    
-    <script type="text/jsx" src="./components/main.jsx">
+  
+
+    <script type="text/jsx"> 
+      var Profile = React.createClass({
+        render: function(){
+          return ( 
+            <div className="profile">
+              <ProfilePic />
+              <SlideDeck />
+            </div>
+          );
+        }
+      });        
+      var ProfilePic = React.createClass({
+        render: function(){
+          return (
+            <div className="profilePic">
+              <h1>Perk Lim</h1>
+              <img src="http://i.ytimg.com/vi/vRyAjF0Hvv4/hqdefault.jpg"/>
+            </div>
+          );
+        }
+      });
+      var SlideDeck = React.createClass({
+        mixins: [ReactFireMixin],
+        getInitialState: function(){
+          console.log("getting initialstate");
+          return {user: "perky"};
+        },
+        componentWillMount: function() {
+          console.log("mounting");
+          var firebaseRef = new Firebase("https://radiant-fire-9112.firebaseio.com/users/tony");
+          this.bindAsObject(firebaseRef, "user");
+        },
+        render: function(){
+          console.log("Hi");
+          console.log(this.state.user.alias);
+          if(this.state.user !== undefined){
+            return (
+            <div>
+            {this.state.user.alias}
+            </div>
+            );
+          }
+          // this.state.user.slides.map(function(slide){
+          //   return (
+          //     <div className="slide">
+          //       <h2>{slide.description}</h2>
+          //     </div>
+          //   );
+          // });
+        }
+      });
+      React.render(
+        <Profile />, document.getElementById('content')
+      );
+
     </script>
+    <!--
+    <script type="text/jsx" src="./components/main.jsx"></script>
+    -->
   </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
